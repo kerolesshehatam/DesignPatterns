@@ -1,0 +1,141 @@
+Structural Patterns
+  Adapter	Match interfaces of different classes
+  Bridge	Separates an objectâ€™s interface from its implementation
+  Decorator	Add responsibilities to objects dynamically
+  Facade	A single class that represents an entire subsystem
+  Proxy	An object representing another object
+  Flyweight	A fine-grained instance used for efficient sharing
+  Composite	A tree structure of simple and composite objects
+  *************************************************************************************************************
+#Adapteris used to allow devices with incompatiable interfaces to work together(If i don't have the privilage to update in the old implementation so you have to wrap you will take the result from the old implmentation and convert it the newly implementation)
+ 
+ convert the interface of one class into an interface a client expects 
+ 
+ The Adapter acts as a wrapper between two objects. It catches calls for one object and transforms them to format and interface recognizable by the second object.
+ 
+**Relations with Other Patterns**
+Bridge is usually designed up-front, letting you develop parts of an application independently of each other. On the other hand, Adapter is commonly used with an existing app to make some otherwise-incompatible classes work together nicely.
+
+Adapter changes the interface of an existing object, while Decorator enhances an object without changing its interface. In addition, Decorator supports recursive composition, which isn’t possible when you use Adapter.
+
+Adapter provides a different interface to the wrapped object, Proxy provides it with the same interface, and Decorator provides it with an enhanced interface.
+
+Facade defines a new interface for existing objects, whereas Adapter tries to make the existing interface usable. Adapter usually wraps just one object, while Facade works with an entire subsystem of objects.
+
+Bridge, State, Strategy (and to some degree Adapter) have very similar structures. Indeed, all of these patterns are based on composition, which is delegating work to other objects. However, they all solve different problems. A pattern isn’t just a recipe for structuring your code in a specific way. It can also communicate to other developers the problem the pattern solves.
+---------------------------------------------------------------------------------------------------------------
+#Bridge: Decouple an abstraction from its implementation so that the two can vary independently.
+
+Usage examples: The Bridge pattern is especially useful when dealing with cross-platform apps, supporting multiple types of database servers or working with several API providers of a certain kind (for example, cloud platforms, social networks, etc.)
+
+	  Abstraction ab = new RefinedAbstraction();
+
+      // Set implementation and call
+      ab.Implementor = new ConcreteImplementorA();
+      ab.Operation();
+ 
+      // Change implemention and call
+
+      ab.Implementor = new ConcreteImplementorB();
+      ab.Operation();
+	  
+**Relations with Other Patterns**
+ Bridge is usually designed up-front, letting you develop parts of an application independently of each other. On the other hand, Adapter is commonly used with an existing app to make some otherwise-incompatible classes work together nicely.
+
+Bridge, State, Strategy (and to some degree Adapter) have very similar structures. Indeed, all of these patterns are based on composition, which is delegating work to other objects. However, they all solve different problems. A pattern isn’t just a recipe for structuring your code in a specific way. It can also communicate to other developers the problem the pattern solves.
+
+You can use Abstract Factory along with Bridge. This pairing is useful when some abstractions defined by Bridge can only work with specific implementations. In this case, Abstract Factory can encapsulate these relations and hide the complexity from the client code.
+
+You can combine Builder with Bridge: the director class plays the role of the abstraction, while different builders act as implementations.
+---------------------------------------------------------------------------------------------------------------
+#Decorator	Add responsibilities to objects dynamically (by wrapping the old implementation into a decrotor class the add new behavir using base.orginal implementation + the newly added implemetation)
+
+**Relations with Other Patterns**
+Adapter changes the interface of an existing object, while Decorator enhances an object without changing its interface. In addition, Decorator supports recursive composition, which isn’t possible when you use Adapter.
+
+Adapter provides a different interface to the wrapped object, Proxy provides it with the same interface, and Decorator provides it with an enhanced interface.
+
+Chain of Responsibility and Decorator have very similar class structures. Both patterns rely on recursive composition to pass the execution through a series of objects. However, there are several crucial differences.
+
+The CoR handlers can execute arbitrary operations independently of each other. They can also stop passing the request further at any point. On the other hand, various Decorators can extend the object’s behavior while keeping it consistent with the base interface. In addition, decorators aren’t allowed to break the flow of the request.
+
+Composite and Decorator have similar structure diagrams since both rely on recursive composition to organize an open-ended number of objects.
+
+A Decorator is like a Composite but only has one child component. There’s another significant difference: Decorator adds additional responsibilities to the wrapped object, while Composite just “sums up” its children’s results.
+
+However, the patterns can also cooperate: you can use Decorator to extend the behavior of a specific object in the Composite tree.
+
+Designs that make heavy use of Composite and Decorator can often benefit from using Prototype. Applying the pattern lets you clone complex structures instead of re-constructing them from scratch.
+
+Decorator lets you change the skin of an object, while Strategy lets you change the guts.
+
+Decorator and Proxy have similar structures, but very different intents. Both patterns are built on the composition principle, where one object is supposed to delegate some of the work to another. The difference is that a Proxy usually manages the life cycle of its service object on its own, whereas the composition of Decorators is always controlled by the client.
+---------------------------------------------------------------------------------------------------------------
+#Facade	A single class that represents an entire subsystem
+mortgage as facade will communicate with the bank sysem/credit/loans sytems to check if he HasGoodCredit/HasNoBadLoans/HasSufficientSavings
+
+**Relations with Other Patterns**
+Facade defines a new interface for existing objects, whereas Adapter tries to make the existing interface usable. Adapter usually wraps just one object, while Facade works with an entire subsystem of objects.
+
+Abstract Factory can serve as an alternative to Facade when you only want to hide the way the subsystem objects are created from the client code.
+
+Flyweight shows how to make lots of little objects, whereas Facade shows how to make a single object that represents an entire subsystem.
+
+Facade and Mediator have similar jobs: they try to organize collaboration between lots of tightly coupled classes.
+
+Facade defines a simplified interface to a subsystem of objects, but it doesn’t introduce any new functionality. The subsystem itself is unaware of the facade. Objects within the subsystem can communicate directly.
+Mediator centralizes communication between components of the system. The components only know about the mediator object and don’t communicate directly.
+A Facade class can often be transformed into a Singleton since a single facade object is sufficient in most cases.
+
+Facade is similar to Proxy in that both buffer a complex entity and initialize it on its own. Unlike Facade, Proxy has the same interface as its service object, which makes them interchangeable.
+---------------------------------------------------------------------------------------------------------------
+#Proxy	An object representing another object / A proxy controls access to the original object, allowing you to perform something either before or after the request gets through to the original object
+
+A credit card is a proxy for a bank account, which is a proxy for a bundle of cash. Both implement the same interface: they can be used for making a payment. A consumer feels great because there’s no need to carry loads of cash around. A shop owner is also happy since the income from a transaction gets added electronically to the shop’s bank account without the risk of losing the deposit or getting robbed on the way to the bank.
+
+**Relations with Other Patterns**
+Adapter provides a different interface to the wrapped object, Proxy provides it with the same interface, and Decorator provides it with an enhanced interface.
+
+Facade is similar to Proxy in that both buffer a complex entity and initialize it on its own. Unlike Facade, Proxy has the same interface as its service object, which makes them interchangeable.
+
+Decorator and Proxy have similar structures, but very different intents. Both patterns are built on the composition principle, where one object is supposed to delegate some of the work to another. The difference is that a Proxy usually manages the life cycle of its service object on its own, whereas the composition of Decorators is always controlled by the client.
+
+---------------------------------------------------------------------------------------------------------------
+#Flyweight	A fine-grained instance used for efficient sharing 
+
+The Flyweight design pattern is used to create lots of small, related objects without invoking a lot of overhead work in doing so, thereby improving performance and maintainability. (Take advantage of the Flyweight design pattern to reduce memory consumption when working with many similar objects
+)
+
+Usage examples: The Flyweight pattern has a single purpose: minimizing memory intake. If your program doesn’t struggle with a shortage of RAM, then you might just ignore this pattern for a while.
+
+Identification: Flyweight can be recognized by a creation method that returns cached objects instead of creating new.
+
+Will I Ever Use This Pattern?
+Probably not. In theory, this pattern could improve performance, but in practice it's limited to scenarios where you find yourself creating a lot of objects from one or more templates
+---------------------------------------------------------------------------------------------------------------
+#Composite	
+
+The Composite design pattern is a structural design pattern that allows us to compose objects into a tree structure and then work with that structure as if it is a single object. That also means using this design pattern makes sense when the part of our app can be represented as a tree.
+
+Composite became a pretty popular solution for the most problems that require building a tree structure. Composite’s great feature is the ability to run methods recursively over the whole tree structure and sum up the results.
+
+
+**Relations with Other Patterns**
+You can use Builder when creating complex Composite trees because you can program its construction steps to work recursively.
+
+Chain of Responsibility is often used in conjunction with Composite. In this case, when a leaf component gets a request, it may pass it through the chain of all of the parent components down to the root of the object tree.
+
+You can use Iterators to traverse Composite trees.
+
+You can use Visitor to execute an operation over an entire Composite tree.
+
+You can implement shared leaf nodes of the Composite tree as Flyweights to save some RAM.
+
+Composite and Decorator have similar structure diagrams since both rely on recursive composition to organize an open-ended number of objects.
+
+A Decorator is like a Composite but only has one child component. There’s another significant difference: Decorator adds additional responsibilities to the wrapped object, while Composite just “sums up” its children’s results.
+
+However, the patterns can also cooperate: you can use Decorator to extend the behavior of a specific object in the Composite tree.
+
+Designs that make heavy use of Composite and Decorator can often benefit from using Prototype. Applying the pattern lets you clone complex structures instead of re-constructing them from scratch.
+
