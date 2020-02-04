@@ -1,0 +1,110 @@
+Creational Patterns
+  Abstract Factory	Creates an instance of several families of classes
+  Builder	Separates object construction from its representation
+  Factory Method	Creates an instance of several derived classes
+  Prototype	A fully initialized instance to be copied or cloned
+  Singleton	A class of which only a single instance can exist
+********************************************************************************************
+Abstract Factory	Creates an instance of several families of classes(Adult,Kids =>cuisineFactory this will build for the adults their dishes also for kids)
+
+The Abstract Factory Pattern is a Creational pattern in which interfaces are defined for creating families of related objects without specifying their actual implementations.
+
+When using this pattern, you create factories which return many kinds of related objects. This pattern enables larger architectures such as Dependency Injection.
+
+**Relations with Other Patterns
+Many designs start by using Factory Method (less complicated and more customizable via subclasses) and evolve toward Abstract Factory, Prototype, or Builder (more flexible, but more complicated).
+
+Builder focuses on constructing complex objects step by step. Abstract Factory specializes in creating families of related objects. Abstract Factory returns the product immediately, whereas Builder lets you run some additional construction steps before fetching the product.
+
+Abstract Factory classes are often based on a set of Factory Methods, but you can also use Prototype to compose the methods on these classes.
+
+Abstract Factory can serve as an alternative to Facade when you only want to hide the way the subsystem objects are created from the client code.
+
+You can use Abstract Factory along with Bridge. This pairing is useful when some abstractions defined by Bridge can only work with specific implementations. In this case, Abstract Factory can encapsulate these relations and hide the complexity from the client code.
+
+Abstract Factories, Builders and Prototypes can all be implemented as Singletons.
+
+----------------------------------------------------------------------------------
+#Factory Method:(you decided to create a logistics managment app you started with type car and it works fine then you need to add a ship and trucks based on client needs so based on one interface you will instantiate the type (this the factory))Define an interface for creating an object, but let subclasses decide which class to instantiate. Factory Method lets a class defer instantiation to subclasses.
+Factory Method is a creational design pattern that provides an interface for creating objects in a superclass, but allows subclasses to alter the type of objects that will be created.
+
+Imagine that you’re creating a logistics management application. The first version of your app can only handle transportation by trucks, so the bulk of your code lives inside the Truck class.
+
+After a while, your app becomes pretty popular. Each day you receive dozens of requests from sea transportation companies to incorporate sea logistics into the app.
+
+Adding a new transportation class to the program causes an issue
+Adding a new class to the program isn’t that simple if the rest of the code is already coupled to existing classes.
+
+Great news, right? But how about the code? At present, most of your code is coupled to the Truck class. Adding Ships into the app would require making changes to the entire codebase. Moreover, if later you decide to add another type of transportation to the app, you will probably need to make all of these changes again.
+
+As a result, you will end up with pretty nasty code, riddled with conditionals that switch the app’s behavior depending on the class of transportation objects.
+
+**Relations with Other Patterns
+Many designs start by using Factory Method (less complicated and more customizable via subclasses) and evolve toward Abstract Factory, Prototype, or Builder (more flexible, but more complicated).
+
+Abstract Factory classes are often based on a set of Factory Methods, but you can also use Prototype to compose the methods on these classes.
+
+You can use Factory Method along with Iterator to let collection subclasses return different types of iterators that are compatible with the collections.
+
+Prototype isn’t based on inheritance, so it doesn’t have its drawbacks. On the other hand, Prototype requires a complicated initialization of the cloned object. Factory Method is based on inheritance but doesn’t require an initialization step.
+
+Factory Method is a specialization of Template Method. At the same time, a Factory Method may serve as a step in a large Template Method.
+----------------------------------------------------------------------------------
+#Builder (CAR Builder use this pattern to build Toyota car or Marcides car):Separate the construction of a complex object from its representation so that the same construction process can create different representations.
+
+Builder is a creational design pattern, which allows constructing complex objects step by step.
+
+Usage examples: The Builder pattern is a well-known pattern in C# world. It’s especially useful when you need to create an object with lots of possible configuration options.
+
+**Relations with Other Patterns
+Many designs start by using Factory Method (less complicated and more customizable via subclasses) and evolve toward Abstract Factory, Prototype, or Builder (more flexible, but more complicated).
+
+Builder focuses on constructing complex objects step by step. Abstract Factory specializes in creating families of related objects. Abstract Factory returns the product immediately, whereas Builder lets you run some additional construction steps before fetching the product.
+
+You can use Builder when creating complex Composite trees because you can program its construction steps to work recursively.
+
+You can combine Builder with Bridge: the director class plays the role of the abstraction, while different builders act as implementations.
+
+Abstract Factories, Builders and Prototypes can all be implemented as Singletons.
+
+-----------------------------------------------------------------------------------
+Prototype Pattern(MemberwiseClone): Prototype is a creational design pattern that lets you copy existing objects without making your code dependent on their classes.
+
+**Relations with Other Patterns
+Many designs start by using Factory Method (less complicated and more customizable via subclasses) and evolve toward Abstract Factory, Prototype, or Builder (more flexible, but more complicated).
+
+Abstract Factory classes are often based on a set of Factory Methods, but you can also use Prototype to compose the methods on these classes.
+
+Prototype can help when you need to save copies of Commands into history.
+
+Designs that make heavy use of Composite and Decorator can often benefit from using Prototype. Applying the pattern lets you clone complex structures instead of re-constructing them from scratch.
+
+Prototype isn’t based on inheritance, so it doesn’t have its drawbacks. On the other hand, Prototype requires a complicated initialization of the cloned object. Factory Method is based on inheritance but doesn’t require an initialization step.
+
+Sometimes Prototype can be a simpler alternative to Memento. This works if the object, the state of which you want to store in the history, is fairly straightforward and doesn’t have links to external resources, or the links are easy to re-establish.
+
+Abstract Factories, Builders and Prototypes can all be implemented as Singletons.
+----------------------------------------------------------------
+Singleton:Ensure a class has only one instance and provide a global point of access to it. but this is not thread safe so you have to lock a shared synchronization object
+
+Identification: Singleton can be recognized by a static creation method, which returns the same cached object.
+
+Singleton VS static class: 
+
+**Singleton Pattern Versus Static Class
+In simple words, Singleton is a pattern and not a keyword. The Singleton pattern has several advantages over static classes. A singleton allows a class for which there is just one, persistent instance across the lifetime of an application. That means, it created a single instance and that instance (reference to that instance) can be passed as a parameter to other methods, and treated as a normal object. While a static class allows only static methods and and you cannot pass static class as parameter.
+
+A Singleton can implement interfaces, inherit from other classes and allow inheritance. While a static class cannot inherit their instance members. So Singleton is more flexible than static classes and can maintain state.
+
+A Singleton can be initialized lazily or asynchronously and loaded automatically by the .NET Framework CLR (common language runtime) when the program or namespace containing the class is loaded. While a static class is generally initialized when it is first loaded and it will lead to potential class loader issues.
+
+Singleton class follow the Object Oriented Principles, so that singletons can be handled polymorphically without forcing their users to assume that there is only one instance. While static cannot.
+
+Other differencess:
+Singleton Objects stored on heap while static class stored in stack.
+Singleton Objects can have constructor while Static Class cannot.
+Singleton Objects can dispose but not static class.
+Singleton Objects can clone but not with static class.
+C# Singleton Pattern Versus Static Class C# vb.net asp.net
+In short, single means single object across the application life cycle, so the scope is at application level. The static does not have any Object pointer, so the scope is at App Domain level. Moreover both should be implemented to be thread-safe.
+
