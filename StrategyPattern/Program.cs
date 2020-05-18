@@ -6,7 +6,23 @@ namespace StrategyPattern
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            SortedList studentRecords = new SortedList();
+
+            studentRecords.Add("Kero");
+            studentRecords.Add("Shehata");
+            studentRecords.Add("Ahmed");
+            studentRecords.Add("Ali");
+
+            studentRecords.SetSortStrategy(new QuickSort());
+            studentRecords.Sort();
+
+            studentRecords.SetSortStrategy(new ShellSort());
+            studentRecords.Sort();
+
+            studentRecords.SetSortStrategy(new MergeSort());
+            studentRecords.Sort();
+
+            Console.ReadKey();
         }
     }
 }
